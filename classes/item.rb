@@ -10,9 +10,11 @@ class Item
   def add_genre(genre)
     @genre = genre
   end
+
   def add_author(author)
     @author = author
   end
+
   def add_label(label)
     @label = label
   end
@@ -23,8 +25,6 @@ class Item
   end
 
   def move_to_archive
-    if can_be_archived?
-      @archived = true
-    end
+    @archived = true if can_be_archived?
   end
 end
