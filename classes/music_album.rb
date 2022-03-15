@@ -3,8 +3,8 @@ require_relative './item'
 class MusicAlbum < Item
   attr_reader :on_spotify
 
-  def initialize(publish_date, archived, on_spotify)
-    super(publish_date, archived)
+  def initialize(publish_date, archived, on_spotify, id: nil)
+    super(publish_date, archived, id: id)
     @on_spotify = on_spotify
   end
 
@@ -37,7 +37,8 @@ class MusicAlbum < Item
         genre = genres.select { |g| g.id == element['genre_id'] }[0]
         music_album = MusicAlbum.new(element['publish_date'],
                                      element['archived'],
-                                     element['on_spotify'])
+                                     element['on_spotify'],
+                                     id: element['id'])
         music_album.add_genre(genre)
         data_arr << music_album
       end
