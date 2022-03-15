@@ -1,4 +1,5 @@
 require_relative './classes/genre'
+require_relative './classes/music_album'
 
 class App
   def initialize
@@ -73,7 +74,26 @@ class App
   def list_all_genres
     puts "Genres:"
     @genres.each do |genre|
-      puts "#{genre.id + 1} - #{genre.name}"
+      puts "#{genre.id} - #{genre.name}"
+    end
+  end
+
+  def add_music_album
+    print 'Publish Date: '
+    publish_date = gets.chomp
+    print 'On Spotify [Y/N]: '
+    on_spotify = gets.chomp
+    on_spotify = on_spotify.downcase != 'n'
+    puts 'Select a genre from the following list by number'
+    list_all_genres
+    genre = gets.chomp
+    if genre.to_i < @genres.length
+      music_album = MusicAlbum.new(publish_date, false, on_spotify)
+      music_album.add_genre(genres[genre.to_i]);
+      @music_albums << music_album
+      puts 'Music album created successfully'
+    else
+      puts 'Please enter a valid genre num'
     end
   end
 end
