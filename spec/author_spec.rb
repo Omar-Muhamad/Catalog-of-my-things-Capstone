@@ -2,9 +2,8 @@ require_relative '../classes/author'
 require_relative '../classes/item'
 
 describe Author do
-
   before :each do
-    @author = Author.new("Mary", "Poppins")
+    @author = Author.new('Mary', 'Poppins')
     @item = Item.new(2002, false)
   end
 
@@ -16,5 +15,4 @@ describe Author do
     @author.add_item(@item)
     expect(@author.items.length).to eq 1
   end
-
 end
