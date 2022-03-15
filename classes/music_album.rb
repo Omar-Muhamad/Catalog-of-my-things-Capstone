@@ -22,7 +22,7 @@ class MusicAlbum < Item
       data_arr << { 
         id: d.id, 
         publish_date: d.publish_date, 
-        archived: d.archived
+        archived: d.archived,
         on_spotify: d.on_spotify,
         genre_id: d.genre.id
       }

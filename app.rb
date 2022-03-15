@@ -1,3 +1,4 @@
+require 'json'
 require_relative './classes/genre'
 require_relative './classes/music_album'
 
@@ -64,6 +65,7 @@ class App
 
   def exit_program
     puts 'Thank you for using this app. Have a great day!'
+    MusicAlbum.write_file(@music_albums)
     exit
   end
 
