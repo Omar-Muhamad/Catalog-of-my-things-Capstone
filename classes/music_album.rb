@@ -9,7 +9,7 @@ class MusicAlbum < Item
   end
 
   def can_be_archived?
-    super && on_spotify == true
+    super && on_spotify
   end
 
   def self.path
