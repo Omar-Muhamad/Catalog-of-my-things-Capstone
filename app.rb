@@ -1,3 +1,5 @@
+require_relative './classes/genre'
+
 class App
   def initialize
     @options = [
@@ -12,6 +14,12 @@ class App
       'Add a game',
       'Exit the app'
     ]
+
+    @genre_names = ['Pop', 'Metal', 'Jazz', 'Country', 'Classical']
+    @genres = []
+    @genre_names.each_with_index do |option, index|
+      @genres << Genre.new(index, option)
+    end
   end
 
   def run
