@@ -29,4 +29,23 @@ class MusicAlbum < Item
     end
     File.write(MusicAlbum.path, JSON.generate(data_arr))
   end
+
+  def self.read_file(genres)
+    data_arr = []
+    if MusicAlbum.check_file
+      JSON.parse(File.read(MusicAlbum.path)).each do |element|
+        genre = genres.select { |g| g.id == element['genre_id'] }[0]
+        music_album = MusicAlbum.new(element['publish_date'], 
+          element['archived'], 
+          element['on_spotify'])
+        music_album.add_genre(genre)
+        data_arr << music_album
+      end
+    end
+    data_arr
+  end
+
+  def self.check_file
+    File.exist?(MusicAlbum.path)
+  end
 end

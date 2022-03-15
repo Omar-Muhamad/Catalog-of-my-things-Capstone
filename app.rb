@@ -17,13 +17,13 @@ class App
       'Exit the app'
     ]
 
-    @music_albums = []
-
     @genre_names = %w[Pop Metal Jazz Country Classical]
     @genres = []
     @genre_names.each_with_index do |option, index|
       @genres << Genre.new(index, option)
     end
+
+    @music_albums = MusicAlbum.read_file(@genres)
   end
 
   def run
