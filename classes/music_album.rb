@@ -19,9 +19,9 @@ class MusicAlbum < Item
   def self.write_file(data = [])
     data_arr = []
     data.each do |d|
-      data_arr << { 
-        id: d.id, 
-        publish_date: d.publish_date, 
+      data_arr << {
+        id: d.id,
+        publish_date: d.publish_date,
         archived: d.archived,
         on_spotify: d.on_spotify,
         genre_id: d.genre.id
@@ -35,9 +35,9 @@ class MusicAlbum < Item
     if MusicAlbum.check_file
       JSON.parse(File.read(MusicAlbum.path)).each do |element|
         genre = genres.select { |g| g.id == element['genre_id'] }[0]
-        music_album = MusicAlbum.new(element['publish_date'], 
-          element['archived'], 
-          element['on_spotify'])
+        music_album = MusicAlbum.new(element['publish_date'],
+                                     element['archived'],
+                                     element['on_spotify'])
         music_album.add_genre(genre)
         data_arr << music_album
       end
