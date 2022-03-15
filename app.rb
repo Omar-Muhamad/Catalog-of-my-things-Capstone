@@ -57,20 +57,22 @@ class App
     when 7 then add_book
     when 8 then add_music_album
     when 9 then add_game
-    when 10 then exit
-    else p 'Please choose a number between 1-10'
+    when 10 then exit_program
+    else puts 'Please choose a number between 1-10'
     end
   end
 
-  def exit
-    p 'Thank you for using this app. Have a great day!'
+  def exit_program
+    exit
+    puts 'Thank you for using this app. Have a great day!'
   end
 
   def list_all_music_albums
     puts "Music Albums:"
     @music_albums.each do |album|
-      puts "#{album.id + 1} - #{album.on_spotify} #{album.publish_date}"
+      puts "#{album.id} - Genre:#{album.genre.name}, Publish Date:#{album.publish_date}, On Spotify: #{album.on_spotify}"
     end
+    puts "No Albums found" if @music_albums.length == 0
   end
 
   def list_all_genres
