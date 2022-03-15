@@ -1,3 +1,4 @@
+require 'json'
 require_relative './classes/genre'
 require_relative './classes/music_album'
 
@@ -16,13 +17,13 @@ class App
       'Exit the app'
     ]
 
-    @music_albums = []
-
     @genre_names = %w[Pop Metal Jazz Country Classical]
     @genres = []
     @genre_names.each_with_index do |option, index|
       @genres << Genre.new(index, option)
     end
+
+    @music_albums = MusicAlbum.read_file(@genres)
   end
 
   def run
@@ -64,6 +65,7 @@ class App
 
   def exit_program
     puts 'Thank you for using this app. Have a great day!'
+    MusicAlbum.write_file(@music_albums)
     exit
   end
 
