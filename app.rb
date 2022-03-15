@@ -122,4 +122,11 @@ class App
     p 'The game has been added successfully!'
     puts
   end
+
+  def list_all_games
+    p 'There are no games here!' if @games.length == 0
+    @games.each_with_index do |game, index| p "[#{index+1}] - Multiplayer: #{game.multiplayer}, Last Played: #{game.last_played_at}, Archived: #{game.archived}"
+    end
+    puts
+  end
 end
