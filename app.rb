@@ -60,4 +60,11 @@ class App
   def exit
     p 'Thank you for using this app. Have a great day!'
   end
+
+  def list_all_genres
+    puts "Genres:"
+    genre.each do |genre|
+      puts "#{genre.id} - #{genre.name}"
+    end
+  end
 end
