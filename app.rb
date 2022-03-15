@@ -18,7 +18,7 @@ class App
 
     @music_albums = []
 
-    @genre_names = ['Pop', 'Metal', 'Jazz', 'Country', 'Classical']
+    @genre_names = %w[Pop Metal Jazz Country Classical]
     @genres = []
     @genre_names.each_with_index do |option, index|
       @genres << Genre.new(index, option)
@@ -68,15 +68,15 @@ class App
   end
 
   def list_all_music_albums
-    puts "Music Albums:"
+    puts 'Music Albums:'
     @music_albums.each do |album|
       puts "#{album.id} - Genre:#{album.genre.name}, Publish Date:#{album.publish_date}, On Spotify: #{album.on_spotify}"
     end
-    puts "No Albums found" if @music_albums.length == 0
+    puts 'No Albums found' if @music_albums.length.zero?
   end
 
   def list_all_genres
-    puts "Genres:"
+    puts 'Genres:'
     @genres.each do |genre|
       puts "#{genre.id} - #{genre.name}"
     end
@@ -93,7 +93,7 @@ class App
     genre = gets.chomp
     if genre.to_i < @genres.length
       music_album = MusicAlbum.new(publish_date, false, on_spotify)
-      music_album.add_genre(@genres[genre.to_i]);
+      music_album.add_genre(@genres[genre.to_i])
       @music_albums << music_album
       puts 'Music album created successfully'
     else
