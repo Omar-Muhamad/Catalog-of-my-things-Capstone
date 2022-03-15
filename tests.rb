@@ -4,10 +4,12 @@ require_relative './classes/game'
 
 author = Author.new('Mary', 'Poppins')
 
-Game.new(true, 2012)
+game = Game.new(true, 2021, 2002, false)
 
 item = Item.new(2002, false)
 
 author.add_item(item)
 
-p item.author
+p item.can_be_archived?
+
+p game.can_be_archived?
