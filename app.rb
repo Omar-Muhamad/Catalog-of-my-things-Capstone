@@ -26,10 +26,12 @@ class App
   end
 
   def run
-    @options.each_with_index do |option, index|
-      puts "[#{index + 1}]- #{option}"
+    loop do
+      @options.each_with_index do |option, index|
+        puts "[#{index + 1}]- #{option}"
+      end
+      user_input
     end
-    user_input
   end
 
   def user_input
@@ -89,7 +91,7 @@ class App
     genre = gets.chomp
     if genre.to_i < @genres.length
       music_album = MusicAlbum.new(publish_date, false, on_spotify)
-      music_album.add_genre(genres[genre.to_i]);
+      music_album.add_genre(@genres[genre.to_i]);
       @music_albums << music_album
       puts 'Music album created successfully'
     else
