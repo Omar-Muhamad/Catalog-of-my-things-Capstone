@@ -63,14 +63,14 @@ class App
   end
 
   def exit_program
-    exit
     puts 'Thank you for using this app. Have a great day!'
+    exit
   end
 
   def list_all_music_albums
     puts 'Music Albums:'
     @music_albums.each do |album|
-      puts "#{album.id} - Genre:#{album.genre.name}, Publish Date:#{album.publish_date}, On Spotify: #{album.on_spotify}"
+      puts "#{album.id} - Genre:#{album.genre.name}, Date:#{album.publish_date}, Spotify: #{album.on_spotify}"
     end
     puts 'No Albums found' if @music_albums.length.zero?
   end
