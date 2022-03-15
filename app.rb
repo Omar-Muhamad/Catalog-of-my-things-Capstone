@@ -15,6 +15,8 @@ class App
       'Exit the app'
     ]
 
+    @music_albums = []
+
     @genre_names = ['Pop', 'Metal', 'Jazz', 'Country', 'Classical']
     @genres = []
     @genre_names.each_with_index do |option, index|
@@ -61,10 +63,17 @@ class App
     p 'Thank you for using this app. Have a great day!'
   end
 
+  def list_all_music_albums
+    puts "Music Albums:"
+    @music_albums.each do |album|
+      puts "#{album.id + 1} - #{album.on_spotify} #{album.publish_date}"
+    end
+  end
+
   def list_all_genres
     puts "Genres:"
-    genre.each do |genre|
-      puts "#{genre.id} - #{genre.name}"
+    @genres.each do |genre|
+      puts "#{genre.id + 1} - #{genre.name}"
     end
   end
 end
