@@ -3,6 +3,8 @@ require_relative './classes/genre'
 require_relative './classes/music_album'
 require_relative './classes/game'
 require_relative './classes/author'
+require_relative './storage_manager/output'
+require_relative './storage_manager/input'
 
 class App
   def initialize
@@ -16,8 +18,9 @@ class App
       @genres << Genre.new(index, option)
     end
     @music_albums = MusicAlbum.read_file(@genres)
-    @games = []
-    @authors = []
+    @state = { games: [], authors: [] }
+    @output = Output.new('./files')
+    @input = Input.new('./files')
     add_authors
   end
 
@@ -26,11 +29,12 @@ class App
     @author_names.each do |author|
       first_name = author.split[0]
       last_name = author.split[1]
-      @authors << Author.new(first_name, last_name)
+      @state[:authors] << Author.new(first_name, last_name)
     end
   end
 
   def run
+    @input.read_games(@state)
     loop do
       @options.each_with_index do |option, index|
         puts "[#{index + 1}]- #{option}"
@@ -70,6 +74,7 @@ class App
   def exit_program
     puts 'Thank you for using this app. Have a great day!'
     MusicAlbum.write_file(@music_albums)
+    @output.save_games(@state)
     exit
   end
 
@@ -108,8 +113,8 @@ class App
   end
 
   def list_all_authors
-    p 'There are no authors here' if @authors.length.zero?
-    @authors.each_with_index do |author, index|
+    p 'There are no authors here' if @state[:authors].length.zero?
+    @state[:authors].each_with_index do |author, index|
       p "[#{index}] - #{author.first_name} #{author.last_name}"
     end
     puts
@@ -130,16 +135,16 @@ class App
     list_all_authors
     author_chosen = gets.chomp.to_i
     game = Game.new(multiplayer, last_played_at, publish_date, archived)
-    game.add_author(@authors[author_chosen])
-    @games << game
+    game.add_author(@state[:authors][author_chosen])
+    @state[:games] << game
     p 'The game has been added successfully!'
     puts
   end
 
   def list_all_games
-    p 'There are no games here!' if @games.length.zero?
-    @games.each_with_index do |game, index|
-      p "[#{index + 1}] - Multiplayer: #{game.multiplayer},
+    p 'There are no games here!' if @state[:games].length.zero?
+    @state[:games].each_with_index do |game, index|
+      print "[#{index + 1}] - Multiplayer: #{game.multiplayer},
       Last Played: #{game.last_played_at}, Archived: #{game.archived}"
     end
     puts
