@@ -1,6 +1,7 @@
 require 'json'
 require_relative './classes/genre'
 require_relative './classes/music_album'
+require_relative './classes/game'
 
 class App
   def initialize
@@ -24,6 +25,7 @@ class App
     end
 
     @music_albums = MusicAlbum.read_file(@genres)
+    @games = []
   end
 
   def run
@@ -101,5 +103,23 @@ class App
     else
       puts 'Please enter a valid genre num'
     end
+  end
+
+  def add_game
+    print 'Is this game for multiple players? [Y/N]: '
+    multiplayer = gets.chomp.downcase
+    multiplayer = multiplayer == "y"
+    print 'Please enter the year this game was last played in [YYYY]: '
+    last_played_at = gets.chomp.to_i
+    print 'In which year was this game published? [YYYY]: '
+    publish_date = gets.chomp.to_i
+    print 'Has this game been archived? [Y/N]: '
+    archived = gets.chomp.downcase
+    # p 'Please choose either Y or N' if archived != "y" || archived != "n"
+    archived = archived == "y"
+    game = Game.new(multiplayer, last_played_at, publish_date, archived)
+    @games << game
+    p 'The game has been added successfully!'
+    puts
   end
 end
