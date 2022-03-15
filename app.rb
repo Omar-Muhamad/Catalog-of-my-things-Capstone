@@ -7,31 +7,25 @@ require_relative './classes/author'
 class App
   def initialize
     @options = [
-      'List all books',
-      'List all music albums',
-      'List all games',
-      'List all genres',
-      'List all labels',
-      'List all authors',
-      'Add a book',
-      'Add a music album',
-      'Add a game',
-      'Exit the app'
+      'List all books', 'List all music albums', 'List all games', 'List all genres', 'List all labels',
+      'List all authors', 'Add a book', 'Add a music album', 'Add a game', 'Exit the app'
     ]
-
     @genre_names = %w[Pop Metal Jazz Country Classical]
     @genres = []
     @genre_names.each_with_index do |option, index|
       @genres << Genre.new(index, option)
     end
-
     @music_albums = MusicAlbum.read_file(@genres)
     @games = []
     @authors = []
+    add_authors
+  end
+
+  def add_authors
     @author_names = ['Stephen King', 'Hermann Hesse', 'J.K Rowling', 'Friedrich Nietzsche']
     @author_names.each do |author|
-      first_name = author.split(' ')[0]
-      last_name = author.split(' ')[1]
+      first_name = author.split[0]
+      last_name = author.split[1]
       @authors << Author.new(first_name, last_name)
     end
   end
@@ -114,8 +108,9 @@ class App
   end
 
   def list_all_authors
-    p "There are no authors here" if @authors.length == 0
-    @authors.each_with_index do |author, index| p "[#{index}] - #{author.first_name} #{author.last_name}"
+    p 'There are no authors here' if @authors.length.zero?
+    @authors.each_with_index do |author, index|
+      p "[#{index}] - #{author.first_name} #{author.last_name}"
     end
     puts
   end
@@ -123,19 +118,18 @@ class App
   def add_game
     print 'Is this game for multiple players? [Y/N]: '
     multiplayer = gets.chomp.downcase
-    multiplayer = multiplayer == "y"
+    multiplayer = multiplayer == 'y'
     print 'Please enter the year this game was last played in [YYYY]: '
     last_played_at = gets.chomp.to_i
     print 'In which year was this game published? [YYYY]: '
     publish_date = gets.chomp.to_i
     print 'Has this game been archived? [Y/N]: '
     archived = gets.chomp.downcase
-    archived = archived == "y"
+    archived = archived == 'y'
     puts 'Choose an author from the following list using the number'
     list_all_authors
     author_chosen = gets.chomp.to_i
     game = Game.new(multiplayer, last_played_at, publish_date, archived)
-    p @authors[author_chosen]
     game.add_author(@authors[author_chosen])
     @games << game
     p 'The game has been added successfully!'
@@ -143,8 +137,10 @@ class App
   end
 
   def list_all_games
-    p 'There are no games here!' if @games.length == 0
-    @games.each_with_index do |game, index| p "[#{index+1}] - Multiplayer: #{game.multiplayer}, Last Played: #{game.last_played_at}, Archived: #{game.archived}"
+    p 'There are no games here!' if @games.length.zero?
+    @games.each_with_index do |game, index|
+      p "[#{index + 1}] - Multiplayer: #{game.multiplayer},
+      Last Played: #{game.last_played_at}, Archived: #{game.archived}"
     end
     puts
   end
