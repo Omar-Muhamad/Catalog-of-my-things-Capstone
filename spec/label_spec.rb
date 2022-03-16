@@ -15,6 +15,7 @@ describe 'Create Label object' do
     it 'should create a label with empty items array' do
       expect(@label.items).to match_array([])
     end
+    
     it 'should create a label with ' do
       @label.add_item(@item)
       expect(@label.items.length).to eql(1)
