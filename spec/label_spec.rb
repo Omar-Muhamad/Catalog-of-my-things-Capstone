@@ -3,7 +3,7 @@ require_relative '../classes/label'
 describe 'Create Label object' do
   context 'given the valid inputs' do
     before :each do
-      @label = Label.new("Lord Of the Rings", "gray")
+      @label = Label.new('Lord Of the Rings', 'gray')
       @item = Item.new(2000, true)
     end
     it 'should create a label with title = Lord of the Rings' do
