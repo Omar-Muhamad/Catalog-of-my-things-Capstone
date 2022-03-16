@@ -2,8 +2,8 @@ require_relative '../classes/music_album'
 
 describe 'Music Album Class' do
   before :each do
-    @album = MusicAlbum.new("2000-01-01", false, true)
-    @album2 = MusicAlbum.new("2000-01-01", false, false)
+    @album = MusicAlbum.new('2000-01-01', false, true)
+    @album2 = MusicAlbum.new('2000-01-01', false, false)
   end
 
   it 'should validate music album publish date' do

@@ -3,9 +3,9 @@ require_relative '../classes/book'
 describe 'Create book object' do
   context 'given the valid inputs' do
     before :each do
-      @book = Book.new('harry potter', 'omar', 'good', "2000-01-01", true)
-      @book2 = Book.new('harry potter', 'omar', 'good', "2020-01-01", true)
-      @book3 = Book.new('harry potter', 'omar', 'bad', "2000-01-01", true)
+      @book = Book.new('harry potter', 'omar', 'good', '2000-01-01', true)
+      @book2 = Book.new('harry potter', 'omar', 'good', '2020-01-01', true)
+      @book3 = Book.new('harry potter', 'omar', 'bad', '2000-01-01', true)
     end
     it 'should create a book with a title Harry Potter' do
       expect(@book.title).to eql('harry potter')

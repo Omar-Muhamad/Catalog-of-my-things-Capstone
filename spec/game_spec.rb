@@ -3,8 +3,8 @@ require_relative '../classes/item'
 
 describe Game do
   before :each do
-    @game = Game.new(true, "2021-01-01", "2002-01-01", false)
-    @game2 = Game.new(true, "2019-01-01", "2002-01-01", false)
+    @game = Game.new(true, '2021-01-01', '2002-01-01', false)
+    @game2 = Game.new(true, '2019-01-01', '2002-01-01', false)
   end
 
   it 'creates a new instance of Game' do
