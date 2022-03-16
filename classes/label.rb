@@ -16,10 +16,3 @@ class Label
     item.label = self
   end
 end
-
-p label = Label.new("Lord Of the Rings", "gray")
-p label.title
-p label.color
-p label.items
-label.add_item(Item.new(2000, true))
-p label.items.length
