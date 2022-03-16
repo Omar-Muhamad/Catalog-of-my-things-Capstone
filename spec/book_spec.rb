@@ -2,15 +2,15 @@ require_relative '../classes/book'
 
 describe 'Create book object' do
   context 'given the valid inputs' do
-    it 'should create a person with a title Harry Potter' do
+    it 'should create a book with a title Harry Potter' do
       book = Book.new("harry potter", "omar", "good", 2000, true)
       expect(book.title).to eql('harry potter')
     end
-    it 'should create a person with a publisher omar' do
+    it 'should create a book with a publisher omar' do
       book = Book.new("harry potter", "omar", "good", 2000, true)
       expect(book.publisher).to eql('omar')
     end
-    it 'should create a person with a title Harry Potter' do
+    it 'should create a book with cover_state = good' do
       book = Book.new("harry potter", "omar", "good", 2000, true)
       expect(book.cover_state).to eql('good')
     end
