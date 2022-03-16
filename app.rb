@@ -85,7 +85,7 @@ class App
   def list_all_books
     if @books.length.zero?
       puts 'No books found!'
-    else 
+    else
       @books.each do |book|
         puts "[#{book.id}]- Title: #{book.title}, Publisher: #{book.publisher}, and Cover State: #{book.cover_state}"
       end
@@ -95,7 +95,7 @@ class App
   def list_all_labels
     if @labels.length.zero?
       puts 'No labels found!'
-    else 
+    else
       @labels.each do |label|
         puts "[#{label.id}]- Title: #{label.title}, color: #{label.color}, and items: #{label.items}"
       end
@@ -113,11 +113,7 @@ class App
     publish_date = gets.chomp.to_i
     print 'Archived(y or n): '
     choice = gets.chomp.downcase
-    if choice == 'y'
-      archived = true
-    else
-      archived = false
-    end
+    archived = choice == 'y'
     p book = Book.new(title, publisher, cover_state, publish_date, archived)
     p @books << book
     run
