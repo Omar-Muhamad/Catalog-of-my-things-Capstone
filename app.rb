@@ -6,6 +6,7 @@ require_relative './modules/games_module'
 require_relative './modules/author_module'
 require_relative './modules/book_module'
 require_relative './modules/label_module'
+require_relative './modules/book_data_module'
 require_relative './storage_manager/output'
 require_relative './storage_manager/input'
 
@@ -16,6 +17,7 @@ class App
   include GamesModule
   include AuthorModule
   include LabelModule
+  include BookData
 
   def initialize
     @options = [
@@ -23,7 +25,7 @@ class App
       'List all authors', 'Add a book', 'Add a music album', 'Add a game', 'Exit the app'
     ]
     @genres = []
-    @books = []
+    @books = read_books
     @labels = []
     @state = { games: [], authors: [] }
     @output = Output.new('./files')
@@ -76,6 +78,7 @@ class App
     puts 'Thank you for using this app. Have a great day!'
     MusicAlbum.write_file(@music_albums)
     @output.save_games(@state)
+    save_books(@books)
     exit
   end
 end
