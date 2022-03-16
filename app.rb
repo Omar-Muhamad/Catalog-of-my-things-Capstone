@@ -3,6 +3,8 @@ require_relative './classes/genre'
 require_relative './classes/music_album'
 require_relative './classes/game'
 require_relative './classes/author'
+require_relative './classes/book'
+require_relative './classes/label'
 require_relative './storage_manager/output'
 require_relative './storage_manager/input'
 
@@ -17,6 +19,8 @@ class App
     @genre_names.each_with_index do |option, index|
       @genres << Genre.new(index, option)
     end
+    @books = []
+    @labels = []
     @music_albums = MusicAlbum.read_file(@genres)
     @state = { games: [], authors: [] }
     @output = Output.new('./files')
@@ -55,7 +59,7 @@ class App
     when 2 then list_all_music_albums
     when 3 then list_all_games
     when 4 then list_all_genres
-    when 5 then list_all_lables
+    when 5 then list_all_labels
     when 6 then list_all_authors
     else operator_two(user_choice)
     end
@@ -76,6 +80,47 @@ class App
     MusicAlbum.write_file(@music_albums)
     @output.save_games(@state)
     exit
+  end
+
+  def list_all_books
+    if @books.length.zero?
+      puts 'No books found!'
+    else 
+      @books.each do |book|
+        puts "[#{book.id}]- Title: #{book.title}, Publisher: #{book.publisher}, and Cover State: #{book.cover_state}"
+      end
+    end
+  end
+
+  def list_all_labels
+    if @labels.length.zero?
+      puts 'No labels found!'
+    else 
+      @labels.each do |label|
+        puts "[#{label.id}]- Title: #{label.title}, color: #{label.color}, and items: #{label.items}"
+      end
+    end
+  end
+
+  def add_book
+    print 'Title: '
+    title = gets.chomp
+    print 'Publisher: '
+    publisher = gets.chomp
+    print 'Cover State: (good or bad) '
+    cover_state = gets.chomp
+    print 'Publish date (yyyy):'
+    publish_date = gets.chomp.to_i
+    print 'Archived(y or n): '
+    choice = gets.chomp.downcase
+    if choice == 'y'
+      archived = true
+    else
+      archived = false
+    end
+    p book = Book.new(title, publisher, cover_state, publish_date, archived)
+    p @books << book
+    run
   end
 
   def list_all_music_albums
