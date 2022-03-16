@@ -3,9 +3,8 @@ require_relative '../classes/item'
 
 describe Game do
   before :each do
-    @game = Game.new(true, 2021, 2002, false)
-    @game2 = Game.new(true, 2019, 2002, false)
-    @item = Item.new(2002, false)
+    @game = Game.new(true, "2021-01-01", "2002-01-01", false)
+    @game2 = Game.new(true, "2019-01-01", "2002-01-01", false)
   end
 
   it 'creates a new instance of Game' do
@@ -14,7 +13,7 @@ describe Game do
 
   it 'returns properties with getter' do
     expect(@game.multiplayer).to eq true
-    expect(@game.last_played_at).to eq 2021
+    expect(Date.parse(@game.last_played_at).year).to eq 2021
   end
 
   it 'can_be_archived? returns false if @last_played_at is < 2' do
