@@ -1,9 +1,9 @@
-require_relative "../classes/game"
-require_relative "./author_module"
+require_relative '../classes/game'
+require_relative './author_module'
 
 module GamesModule
   include AuthorModule
-  
+
   def add_game(state)
     print 'Is this game for multiple players? [Y/N]: '
     multiplayer = gets.chomp.downcase

@@ -1,4 +1,4 @@
-require_relative "../classes/book"
+require_relative '../classes/book'
 
 module BookModule
   def list_all_books(books)
@@ -10,7 +10,7 @@ module BookModule
       end
     end
   end
-  
+
   def add_book
     print 'Title: '
     title = gets.chomp
@@ -23,6 +23,6 @@ module BookModule
     print 'Archived(y or n): '
     choice = gets.chomp.downcase
     archived = choice == 'y'
-    book = Book.new(title, publisher, cover_state, publish_date, archived)
+    Book.new(title, publisher, cover_state, publish_date, archived)
   end
 end
